@@ -1,5 +1,5 @@
 const http = require('http')
-const { getProducts, getProduct, addProduct } = require('./controllers/productController')
+const { getProducts, getProduct, addProduct, updateProduct, deleteProduct} = require('./controllers/productController')
 
 const PORT = 8000;
 
@@ -10,6 +10,14 @@ const server = http.createServer((req, res) => {
    else if(req.url.match(/\/api\/products\/([0-9]+)/) && req.method === 'GET'){
         const id = req.url.split('/').pop()
         getProduct(req, res, id)
+    }
+    else if(req.url.match(/\/api\/products\/([0-9a-f-]+)/) && req.method === 'PUT'){
+        const id = req.url.split('/').pop()
+        updateProduct(req, res, id)
+    }
+    else if(req.url.match(/\/api\/products\/([0-9a-f-]+)/) && req.method === 'DELETE'){
+        const id = req.url.split('/').pop()
+        deleteProduct(req, res, id)
     }
     else if(req.url === '/api/products' && req.method === 'POST'){
         addProduct(req, res)

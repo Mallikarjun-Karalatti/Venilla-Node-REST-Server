@@ -1,4 +1,4 @@
-const { getAllProducts, getProductById, addProductToDB } = require('../models/productModel')
+const { getAllProducts, getProductById, addProductToDB, updateProductInDB, deleteProductFromDB } = require('../models/productModel')
 const { getBody } = require('../utils/utility')
 
 // @desc    Gets All Products
@@ -54,4 +54,48 @@ const addProduct = async (req, res) => {
     }
 }
 
-module.exports = { getProducts, getProduct, addProduct};
+// @desc  update Product 
+// @route UPDATE /api/products/:id
+const updateProduct = async (req, res, id) => {
+    
+    try {
+        const product = await getProductById(id)
+        if (!product) {
+            res.writeHead(404, { 'Content-Type': 'application/json' })
+            res.end(JSON.stringify({ message: 'Product not found' }))
+        } else {
+            const updatedData = await getBody(req)
+            const updatedProduct = { ...product, ...updatedData }
+            updateProductInDB(id, updatedProduct)
+            res.writeHead(200, { 'Content-Type': 'application/json' })
+            res.end(JSON.stringify(updatedProduct))
+        }
+    } catch (error) {
+        console.error('Error fetching product:', error)
+        res.writeHead(500, { 'Content-Type': 'application/json' })
+        res.end(JSON.stringify({ message: 'Error fetching product' }))
+    }
+}
+
+// @desc  delete Product 
+// @route DELETE /api/products/:id
+const deleteProduct = async (req, res, id) => {
+    
+    try {
+        const product = await getProductById(id)
+        if (!product) {
+            res.writeHead(404, { 'Content-Type': 'application/json' })
+            res.end(JSON.stringify({ message: 'Product not found' }))
+        } else {
+            deleteProductFromDB(id)
+            res.writeHead(200, { 'Content-Type': 'application/json' })
+            res.end(JSON.stringify({ message: 'Product deleted successfully' }))
+        }
+    } catch (error) {
+        console.error('Error fetching product:', error)
+        res.writeHead(500, { 'Content-Type': 'application/json' })
+        res.end(JSON.stringify({ message: 'Error fetching product' }))
+    }
+}
+
+module.exports = { getProducts, getProduct, addProduct, updateProduct, deleteProduct};

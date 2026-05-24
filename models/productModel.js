@@ -20,5 +20,15 @@ const addProductToDB = (product) =>  {
     writeProductToDB(products)
 }
 
+const updateProductInDB = (id, updatedProduct) => {
+    products = products.map((product) => product.id === id ? updatedProduct : product)
+    writeProductToDB(products)
+}
 
-module.exports = { getAllProducts, getProductById, addProductToDB }
+const deleteProductFromDB = (id) => {
+    products = products.filter((product) => product.id !== id)
+    writeProductToDB(products)
+}
+
+
+module.exports = { getAllProducts, getProductById, addProductToDB, updateProductInDB, deleteProductFromDB }
