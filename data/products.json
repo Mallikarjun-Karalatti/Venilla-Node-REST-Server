@@ -28,5 +28,11 @@
     "name": "Logitech G-Series Gaming Mouse",
     "description": "Get a better handle on your games with this Logitech LIGHTSYNC gaming mouse. The six programmable buttons allow customization for a smooth playing experience",
     "price": 49.99
+  },
+  {
+    "id": "a9908402-65a8-4f09-b28f-23c7349c0857",
+    "name": "Samsung Galaxy S21",
+    "description": "Flagship Samsung phone",
+    "price": 799.99
   }
 ]
