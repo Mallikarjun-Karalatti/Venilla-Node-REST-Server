@@ -1,0 +1,16 @@
+{
+  "name": "venilla-node-rest-server",
+  "version": "1.0.0",
+  "description": "A basic venilla node rest api server",
+  "license": "ISC",
+  "author": "ArjunMK",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
